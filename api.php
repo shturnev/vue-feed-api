@@ -1,11 +1,12 @@
 <?php
 require_once "back/vendor/autoload.php";
 
+$U = new \classes\User();
+
 if($_REQUEST["method_name"] == "login"){
-    $O = new \classes\User();
 
     try{
-       $res = $O->login($_REQUEST);
+       $res = $U->login($_REQUEST);
        header("Location: /");
     }
     catch(Exception $e){
@@ -13,13 +14,26 @@ if($_REQUEST["method_name"] == "login"){
     }
 }
 if($_REQUEST["method_name"] == "confirm_email" && $_REQUEST["code"]){
-    $O = new \classes\User();
 
     try{
-       $res = $O->confirm_email($_REQUEST["code"]);
+       $res = $U->confirm_email($_REQUEST["code"]);
        header("Location: /");
     }
     catch(Exception $e){
         echo $e->getMessage(); exit;
     }
 }
+
+//clients
+if($_REQUEST["method_name"] == "client_create"){
+    $O = new \classes\Client();
+
+    try{
+        $res = $O->create($_REQUEST, $_COOKIE['token']);
+        header("Location: /");
+    }
+    catch(Exception $e){
+        echo $e->getMessage(); exit;
+    }
+}
+

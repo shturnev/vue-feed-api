@@ -20,6 +20,9 @@ $auth = $U->isAuth($_COOKIE['token']);
     .material-icons {
       vertical-align: middle;
     }
+    button{
+      outline: none;
+    }
   </style>
 
 </head>
@@ -50,13 +53,104 @@ $auth = $U->isAuth($_COOKIE['token']);
           </div>
         <? endif; ?>
 
+        <? if ($auth): ?>
+
+        <!--Create client-->
+        <div class="text-center" style="margin-top: 35px;">
+          <button class="hollow button success " type="button" data-toggle="create-client-cont">
+            <i class="material-icons">add</i> Create client
+          </button>
+
+          <div id="create-client-cont" data-toggler data-animate="hinge-in-from-top hinge-out-from-top" hidden>
+            <form action="/api.php" method="post" enctype="multipart/form-data">
+              <input type="hidden" name="method_name" value="client_create"/>
+
+              <div class="input-group">
+                <input class="input-group-field" name="title" type="text" placeholder="Title">
+                <div class="input-group-button">
+                  <input type="submit" class="button" value="Submit">
+                </div>
+              </div>
+            </form>
+          </div>
+
+        </div>
+
+        <div style="margin-top: 35px;">
+          <h4>Your clients</h4>
+          <ul class="accordion"
+              data-accordion
+              data-multi-expand="true"
+              data-allow-all-closed="true"
+          >
+            <li class="accordion-item is-active" data-accordion-item>
+              <div class="accordion-menu"></div>
+              <a href="#" class="accordion-title">Lorem ipsum.</a>
+
+
+              <div class="accordion-content" data-tab-content>
+                <div class="grid-x grid-padding-x">
+                  <div class="cell medium-5 small-12">
+                    <div class="input-group">
+                      <label class="input-group-label">public key</label>
+                      <input class="input-group-field" value="ss5ds5848d5gl3kj6" type="text" >
+                    </div>
+                  </div>
+                  <div class="cell medium-5 small-12">
+                    <div class="input-group">
+                      <label class="input-group-label">secret key</label>
+                      <input class="input-group-field" value="ss5ds54344 434 34 34848d5gl3kj6" type="text" >
+                    </div>
+                  </div>
+                  <div class="cell  medium-2 small-12">
+                    <a href="#" class="button tiny expanded secondary hollow"><i class="material-icons">delete</i></a>
+                  </div>
+                </div>
+
+              </div>
+            </li>
+            <li class="accordion-item " data-accordion-item>
+              <div class="accordion-menu"></div>
+              <a href="#" class="accordion-title">Lorem ipsum.</a>
+
+
+              <div class="accordion-content" data-tab-content>
+                <div class="grid-x grid-padding-x">
+                  <div class="cell medium-5 small-12">
+                    <div class="input-group">
+                      <label class="input-group-label">public key</label>
+                      <input class="input-group-field" value="ss5ds5848d5gl3kj6" type="text" >
+                    </div>
+                  </div>
+                  <div class="cell medium-5 small-12">
+                    <div class="input-group">
+                      <label class="input-group-label">secret key</label>
+                      <input class="input-group-field" value="ss5ds54344 434 34 34848d5gl3kj6" type="text" >
+                    </div>
+                  </div>
+                  <div class="cell  medium-2 small-12">
+                    <a href="#" class="button tiny expanded secondary hollow"><i class="material-icons">delete</i></a>
+                  </div>
+                </div>
+
+              </div>
+            </li>
+          </ul>
+        </div>
+
+
+        <? endif; ?>
+
 
     </div>
   </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="/resources/foundation/js/app.js"></script>
+<script type="text/javascript" src="/resources/foundation/js/vendor/foundation.min.js"></script>
+<script>
+  $(document).foundation();
+</script>
 <!--<script src="//ulogin.ru/js/ulogin.js"></script>
 <script>
   function auth(token) {
