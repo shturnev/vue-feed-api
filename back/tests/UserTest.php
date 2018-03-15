@@ -9,17 +9,23 @@
 namespace tests;
 
 use classes\User;
+use Nette\Http\UrlScript;
 use PHPUnit\Framework\TestCase;
+
 
 class UserTest extends TestCase
 {
 
     public function test_login()
     {
-        $token = "0cb9f74047c8bfa06fb458d8a49cda2b";
-        $res = (new User())->login($token);
 
-        $this->assertTrue(is_array($res));
+        $P = new UrlScript();
+        $tt =  $P->getBaseUrl();
+
+
+        $res = (new User())->login(["email" => "sht_job@ukr.net", "pass" => 123]);
+
+        $this->assertTrue(is_array($res) || is_bool($res));
     }
 
     public function test_delete()
