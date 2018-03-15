@@ -49,6 +49,8 @@ class User
             if(!$resDb['verified']){
                 throw new \Exception("You need to confirm your email");}
 
+            //ну и на конец если все ок то авторизовывем
+            self::isAuth($resDb["token"]);
             return $resDb;
         }
 
@@ -95,15 +97,20 @@ class User
         $this->DB->update("users", ["verified" => 1]);
 
         $resDb["verified"] = 1;
+        self::isAuth($resDb["token"]);
         return $resDb;
     }
 
-    public function auth()
+    public static function auth($token)
     {
-        
+        setcookie("token", $token, strtotime("+1 year"));
     }
-
-
+    public function isAuth($token)
+    {
+        $token = TextSecurity::shield_hard($token);
+        $this->DB->where("token", $token)->where("verified", 1);
+        return $this->DB->getOne("users");
+    }
     private function new_token()
     {
         return md5(time().rand());

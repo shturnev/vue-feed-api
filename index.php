@@ -1,16 +1,17 @@
 <?php
-/*
- * 1 подключение клиента
- * 2 созднаие проекта
- * 3 описание методов
- */
+require_once "back/vendor/autoload.php";
+
+$U = new \classes\User();
+$auth = $U->isAuth($_COOKIE['token']);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="utf-8"/>
-    <title></title>
-    <link rel="shortcut icon" href=""/>
+    <title>welcome to Api</title>
+<!--    <link rel="shortcut icon" href=""/>-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/resources/foundation/css/foundation.min.css"/>
 
