@@ -10,6 +10,7 @@ namespace classes;
 
 
 use classes\helpers\DB;
+use classes\helpers\TextSecurity;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class User
@@ -18,6 +19,7 @@ class User
     public function __construct()
     {
         $this->DB = DB::init();
+        $this->url = "http://vue-feed-api/";
     }
 
     /**
@@ -62,8 +64,8 @@ class User
         $mail->Body    = '
             <h2>Welcome to API!</h2>
             <p>For continue you need to confirm your email by this link 
-              <a href="http://vue-feed-api/api.php?method_name=confirm_email&code='.$code.'">
-                http://vue-feed-api/api.php?method_name=confirm_email&code='.$code.'
+              <a href="'.$this->url.'api.php?method_name=confirm_email&code='.$code.'">
+                '.$this->url.'api.php?method_name=confirm_email&code='.$code.'
               </a>
             </p>
         ';
@@ -79,6 +81,26 @@ class User
         $this->DB->insert("users", $arr);
 
         return true;
+    }
+
+    public function confirm_email(string $token)
+    {
+        $token = TextSecurity::shield_hard($token);
+        $this->DB->where("token", $token);
+        $resDb = $this->DB->getOne("users");
+        if(!$resDb){
+            throw new \Exception("Access denied");}
+
+        $this->DB->where("token", $token);
+        $this->DB->update("users", ["verified" => 1]);
+
+        $resDb["verified"] = 1;
+        return $resDb;
+    }
+
+    public function auth()
+    {
+        
     }
 
 
