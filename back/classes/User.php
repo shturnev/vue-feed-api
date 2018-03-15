@@ -23,8 +23,9 @@ class User
     }
 
     /**
+     * Авторизация / регистрация
      * @param array $array
-     * @return array
+     * @return array - [email, pass]
      * @throws \Exception
      * @throws \PHPMailer\PHPMailer\Exception
      */
@@ -50,7 +51,7 @@ class User
                 throw new \Exception("You need to confirm your email");}
 
             //ну и на конец если все ок то авторизовывем
-            self::isAuth($resDb["token"]);
+            self::auth($resDb["token"]);
             return $resDb;
         }
 
@@ -81,6 +82,7 @@ class User
             "date"  => time()
         ];
         $this->DB->insert("users", $arr);
+        setcookie("need_email_confirm", 1, strtotime("+1 year"));
 
         return true;
     }
@@ -88,21 +90,22 @@ class User
     public function confirm_email(string $token)
     {
         $token = TextSecurity::shield_hard($token);
+        $new_token = $this->new_token();
         $this->DB->where("token", $token);
         $resDb = $this->DB->getOne("users");
         if(!$resDb){
             throw new \Exception("Access denied");}
 
         $this->DB->where("token", $token);
-        $this->DB->update("users", ["verified" => 1]);
+        $this->DB->update("users", ["verified" => 1, 'token' => $new_token]);
 
         $resDb["verified"] = 1;
-        self::isAuth($resDb["token"]);
+        self::auth($new_token);
         return $resDb;
     }
-
     public static function auth($token)
     {
+        setcookie("need_email_confirm", 1, time() - 5);
         setcookie("token", $token, strtotime("+1 year"));
     }
     public function isAuth($token)
