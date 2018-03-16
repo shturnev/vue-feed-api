@@ -42,7 +42,7 @@ class ClientGet
         {
             $this->DB->where("public_key", TextSecurity::shield_hard($array['public_key']));
         }
-        $this->DB->where("user_id", $user['id']);
+        $this->DB->where("user_id", $user['id'])->orderBy("id", "DESC");
 
         return $this->DB->get("clients");
     }

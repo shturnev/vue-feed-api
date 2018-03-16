@@ -11,7 +11,7 @@ if ($auth) {
     try {
         $clients = (new \classes\getters\ClientGet($auth))->get(['m' => 2]);
     } catch (Exception $e) {
-      
+
     }
 }
 
@@ -24,6 +24,7 @@ if ($auth) {
   <!--    <link rel="shortcut icon" href=""/>-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="/resources/foundation/css/foundation.min.css"/>
+  <link rel="stylesheet" type="text/css" href="/resources/highlight/styles/darcula.css"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <style>
@@ -51,7 +52,8 @@ if ($auth) {
       </div>
 
 
-        <? if ($e){ ?><div style="margin: 35px 0;" class="callout alert"><? echo $e->getMessage() ?></div><? } ?>
+        <? if ($e) { ?>
+          <div style="margin: 35px 0;" class="callout alert"><? echo $e->getMessage() ?></div><? } ?>
 
 
         <? if (!$auth): ?>
@@ -95,48 +97,8 @@ if ($auth) {
 
           </div>
 
-            <? if ($clients): ?>
-              <div style="margin-top: 35px;">
-              <h4>Your clients</h4>
-              <ul class="accordion"
-                  data-accordion
-                  data-multi-expand="true"
-                  data-allow-all-closed="true"
-              >
-                  <? foreach ($clients as $client) { ?>
-                    <li class="accordion-item" data-accordion-item>
-                      <div class="accordion-menu"></div>
-                      <a href="#" class="accordion-title"><? echo $client['title'] ?></a>
-
-
-                      <div class="accordion-content" data-tab-content>
-                        <div class="grid-x grid-padding-x">
-                          <div class="cell medium-5 small-12">
-                            <div class="input-group">
-                              <label class="input-group-label">public key</label>
-                              <input class="input-group-field" value="<? echo $client['public_key'] ?>" type="text">
-                            </div>
-                          </div>
-                          <div class="cell medium-5 small-12">
-                            <div class="input-group">
-                              <label class="input-group-label">secret key</label>
-                              <input class="input-group-field" value="<? echo $client['private_key'] ?>" type="text">
-                            </div>
-                          </div>
-                          <div class="cell  medium-2 small-12">
-                            <a href="/api.php?method_name=client_delete&id=<? echo $client['id'] ?>" data-js="delete-item" class="button tiny expanded secondary hollow">
-                              <i class="material-icons">delete</i>
-                            </a>
-                          </div>
-                        </div>
-
-                      </div>
-                    </li>
-                  <? } ?>
-              </ul>
-            </div>
-            <? endif; ?>
-
+          <? if ($clients):  require "resources/page_blocks/clients.php"; endif; ?>
+          <? require "resources/page_blocks/methods.php" ?>
 
         <? endif; ?>
 
@@ -147,6 +109,7 @@ if ($auth) {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="/resources/foundation/js/vendor/foundation.min.js"></script>
+<script type="text/javascript" src="/resources/highlight/highlight.pack.js"></script>
 <script>
   $(document).foundation();
   $('[data-js="delete-item"]').on("click", function () {
@@ -154,6 +117,8 @@ if ($auth) {
       return false;
     }
   });
+
+  hljs.initHighlightingOnLoad();
 
 </script>
 

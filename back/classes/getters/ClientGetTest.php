@@ -19,8 +19,8 @@ class ClientGetTest extends TestCase
         $arr = [
             "m" => 1,
             "email" => "sht_job@ukr.net",
-            "pass" => 1213,
-//            "public_key" => "e5326bfe72b1dcd4a6a3ff6068c95ae73a141bb6dd08cbe95604e31584ec0489"
+            "pass" => 123,
+            "public_key" => "e5326bfe72b1dcd4a6a3ff6068c95ae73a141bb6dd08cbe95604e31584ec0489"
         ];
 
         $res = (new ClientGet())->get($arr);

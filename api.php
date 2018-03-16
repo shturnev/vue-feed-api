@@ -50,3 +50,35 @@ if($_REQUEST["method_name"] == "client_delete"){
     }
 }
 
+
+/*-----------------------------------
+Удалённый request
+-----------------------------------*/
+$postData = json_decode(file_get_contents('php://input'), true);
+if($postData){$_REQUEST = $postData;}
+header('Content-Type: application/json');
+
+
+
+if($_REQUEST["method_name"] == "client_get"){
+
+    $O = new \classes\getters\ClientGet();
+
+    try{
+        if(!in_array($_REQUEST["m"], [1]) ){
+            throw new \Exception("Invalid parametr `m`");}
+
+        $res['response'] = $O->get($_REQUEST);
+
+    }
+    catch(Exception $e){
+        $res['error'] = $e->getMessage();
+    }
+
+    echo json_encode($res);
+    exit;
+}
+
+
+
+
