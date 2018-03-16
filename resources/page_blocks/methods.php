@@ -6,10 +6,10 @@
       data-allow-all-closed="true"
   >
 
+    <!-- Client. Получить инфо о клиенте(ах) -->
     <li class="accordion-item" data-accordion-item>
-      <div class="accordion-menu"></div>
       <a href="#" class="accordion-title">
-        Получить список своих клиентов или клиента
+        Client. Получить инфо о клиенте(ах)
       </a>
 
       <div class="accordion-content" data-tab-content>
