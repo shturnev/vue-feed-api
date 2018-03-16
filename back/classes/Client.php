@@ -14,10 +14,12 @@ use classes\helpers\TextSecurity;
 
 class Client
 {
+    public $user;
 
-    public function __construct()
+    public function __construct($user = null)
     {
         $this->DB = DB::init();
+        $this->user = $user;
     }
 
     public function create($array, $token)
@@ -40,6 +42,17 @@ class Client
 
         return $resDb;
 
+    }
+
+    public function delete($array)
+    {
+        if(!$this->user or !is_numeric($array['id'])){
+            throw new \Exception("Invalid parametrs `user` or `id`");}
+
+        $this->DB->where("user_id", $this->user['id'])->where("id", $array['id']);
+        $resDb = $this->DB->delete("clients");
+
+        return $resDb;
     }
 
     public static function new_key()
