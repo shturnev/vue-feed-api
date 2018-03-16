@@ -31,25 +31,10 @@ class User
      */
     public function login(array $array)
     {
-        if(!filter_var($array['email'], FILTER_VALIDATE_EMAIL)){
-            throw new \Exception('Invalid parametr `email`');}
-
-        if(!$array['pass']){
-            throw new \Exception("Password should not be empty ");}
-
-
-        //проверим есть ли такой пользователь
-        $this->DB->where("email", strtolower($array['email']));
-        $resDb = $this->DB->getOne("users");
+        $resDb = $this->check_user_by_login($array);
 
         if($resDb)
         {
-            if(!password_verify($array['pass'], $resDb['pass'])){
-                throw new \Exception("Access Denied");}
-
-            if(!$resDb['verified']){
-                throw new \Exception("You need to confirm your email");}
-
             //ну и на конец если все ок то авторизовывем
             self::auth($resDb["token"]);
             return $resDb;
@@ -114,8 +99,37 @@ class User
         $this->DB->where("token", $token)->where("verified", 1);
         return $this->DB->getOne("users");
     }
+
+    public function check_user_by_login($array)
+    {
+        if(!filter_var($array['email'], FILTER_VALIDATE_EMAIL)){
+            throw new \Exception('Invalid parametr `email`');}
+
+        if(!$array['pass']){
+            throw new \Exception("Password should not be empty ");}
+
+
+        //проверим есть ли такой пользователь
+        $this->DB->where("email", strtolower($array['email']));
+        $resDb = $this->DB->getOne("users");
+
+        if($resDb){
+            if(!password_verify($array['pass'], $resDb['pass'])){
+                throw new \Exception("Access Denied");}
+
+            if(!$resDb['verified']){
+                throw new \Exception("You need to confirm your email");}
+        }
+
+        return $resDb;
+
+    }
+
+
     private function new_token()
     {
         return md5(time().rand());
     }
+
+
 }
