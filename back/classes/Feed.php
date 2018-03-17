@@ -23,6 +23,7 @@ class Feed
     /**
      * Создать запись в ленте
      * @param $array - [private_key, protected, title, text]
+     * @return array
      * @throws \Exception
      */
     public function add($array)
@@ -30,8 +31,23 @@ class Feed
         if(!$array['private_key']){
             throw new \Exception("Пропущен важный параметр `private_key`");}
 
-        $this->DB->where("private_key", TextSecurity::shield_hard($array['private_key']));
-        $client = $this->DB->getOne("clients");
-        //todo продолжить здесь
+        $client = (new Client())->check_key($array['private_key'], 'private');
+        if (!$client){
+            throw new \Exception("Client not found");}
+
+        $arr = [
+            "client_id" => $client['id'],
+            "user_id" => $client['user_id'],
+            "protected" => ($array['protected']) ? 1 :0,
+            "date" => time(),
+            "title" => TextSecurity::shield_hard($array['title']),
+            "text" => TextSecurity::shield_light($array['text']),
+        ];
+
+        $res = $this->DB->insert("feed", $arr);
+        $arr['id'] = $this->DB->getInsertId();
+
+        return $arr;
+
     }
 }

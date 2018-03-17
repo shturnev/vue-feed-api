@@ -55,5 +55,46 @@
         </div>
     </li>
 
+    <!-- Feed. add -->
+    <li class="accordion-item" data-accordion-item>
+      <a href="#" class="accordion-title">
+        Feed. Добавить запись
+      </a>
+
+      <div class="accordion-content" data-tab-content>
+        <div class="grid-x grid-padding-x">
+          <div class="cell medium-6 small-12">
+            <h5>Request params: </h5>
+            <ul class="no-bullet" style="font-size: 13px; padding-left: 20px; margin-top: 0;">
+              <li><b>method_name</b>: 'feed_add'</li>
+              <li><b>private_key</b>: (string)</li>
+              <li><b>protected</b>: (int) 0 / 1</li>
+              <li><b>title</b>: (string)</li>
+              <li><b>text</b>: (string)</li>
+            </ul>
+          </div>
+          <div class="cell medium-6 small-12">
+            <h5>Response: </h5>
+
+            <pre><code>
+{
+  "response": {
+    "client_id": 6,
+    "user_id": 7,
+    "protected": 0,
+    "date": 1521285397,
+    "title": "test title",
+    "text": "long text text",
+    "id": 3
+  }
+}
+              </code></pre>
+          </div>
+
+
+        </div>
+    </li>
+
+
   </ul>
 </div>

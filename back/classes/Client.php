@@ -59,4 +59,16 @@ class Client
     {
         return hash('sha256', time().rand().rand());
     }
+
+    /**
+     * проверить ключ
+     * @param $key
+     * @param string $type
+     */
+    public function check_key($key, $type = 'private')
+    {
+        $this->DB->where($type."_key", TextSecurity::shield_hard($key));
+        return $this->DB->getOne("clients");
+
+    }
 }

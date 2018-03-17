@@ -21,7 +21,7 @@ if ($auth) {
 <head>
   <meta charset="utf-8"/>
   <title>welcome to Api</title>
-  <!--    <link rel="shortcut icon" href=""/>-->
+
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="/resources/foundation/css/foundation.min.css"/>
   <link rel="stylesheet" type="text/css" href="/resources/highlight/styles/darcula.css"/>

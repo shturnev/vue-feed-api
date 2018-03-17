@@ -59,7 +59,7 @@ if($postData){$_REQUEST = $postData;}
 header('Content-Type: application/json');
 
 
-
+//CLIENT
 if($_REQUEST["method_name"] == "client_get"){
 
     $O = new \classes\getters\ClientGet();
@@ -70,6 +70,22 @@ if($_REQUEST["method_name"] == "client_get"){
 
         $res['response'] = $O->get($_REQUEST);
 
+    }
+    catch(Exception $e){
+        $res['error'] = $e->getMessage();
+    }
+
+    echo json_encode($res);
+    exit;
+}
+
+//FEED
+if($_REQUEST["method_name"] == "feed_add" ){
+
+    $O = new \classes\Feed();
+
+    try{
+        $res['response'] = $O->add($_REQUEST);
     }
     catch(Exception $e){
         $res['error'] = $e->getMessage();
