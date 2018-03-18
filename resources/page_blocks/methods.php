@@ -124,6 +124,30 @@
         </div>
     </li>
 
+    <!-- Feed. up -->
+    <li class="accordion-item" data-accordion-item>
+      <a href="#" class="accordion-title">
+        Feed. Поднять запись
+      </a>
+
+      <div class="accordion-content" data-tab-content>
+        <div class="grid-x grid-padding-x">
+          <div class="cell medium-6 small-12">
+            <h5>Request params: </h5>
+            <ul class="no-bullet" style="font-size: 13px; padding-left: 20px; margin-top: 0;">
+              <li><b>method_name</b>: 'feed_up'</li>
+              <li><b>private_key</b>: (string)</li>
+              <li><b>id</b>: (int)</li>
+            </ul>
+          </div>
+          <div class="cell medium-6 small-12">
+            <h5>Response: </h5>
+
+            <pre><code>{"response":true}</code></pre>
+          </div>
+        </div>
+    </li>
+
     <!-- Feed. delete -->
     <li class="accordion-item" data-accordion-item>
       <a href="#" class="accordion-title">

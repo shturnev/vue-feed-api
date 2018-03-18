@@ -58,5 +58,16 @@ class FeedTest extends TestCase
         $this->assertTrue($res);
     }
 
+    public function test_up()
+    {
+        $arr = [
+            "id" => 1,
+            "private_key" => "c1d0920dc08e442e9fa8f8d4403bb917697f1b04597cee788c08fbe534bbac95"
+        ];
+
+        $res = (new Feed())->up($arr);
+        $this->assertTrue($res);
+    }
+
 
 }

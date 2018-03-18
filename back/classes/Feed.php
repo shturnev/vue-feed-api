@@ -116,4 +116,33 @@ class Feed
     }
 
 
+    /**
+     * Поднять
+     * @param $array - [id, private_key]
+     * @return bool
+     * @throws \Exception
+     */
+    public function up($array)
+    {
+        if(!is_numeric($array['id'])){
+            throw new \Exception("Invalid parametr `id`");}
+
+        $client = (new Client())->check_key($array['private_key'], "private");
+        if (!$client){
+            throw new \Exception("Client not found");}
+
+        //узнаем инфо про эту запись
+        $this->DB->where("id", $array['id'])->where("client_id", $client["id"]);
+        $resDB = $this->DB->getOne("feed");
+        if(!$resDB){
+            throw new \Exception("Item not found or access denied");}
+
+        //upd
+        $this->DB->where("id", $array['id']);
+        $res = $this->DB->update("feed", ["date" => time()]);
+
+        return $res;
+    }
+
+
 }
