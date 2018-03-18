@@ -41,6 +41,9 @@ if ($auth) {
 
 <body>
 
+
+
+
 <div class="grid-container">
   <div class="grid-x">
     <div class="cell">
@@ -101,6 +104,9 @@ if ($auth) {
           <? require "resources/page_blocks/methods.php" ?>
 
         <? endif; ?>
+
+
+      <div style="height: 150px;"></div>
 
 
     </div>

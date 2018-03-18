@@ -95,6 +95,181 @@
         </div>
     </li>
 
+    <!-- Feed. edit -->
+    <li class="accordion-item" data-accordion-item>
+      <a href="#" class="accordion-title">
+        Feed. Редактировать запись
+      </a>
+
+      <div class="accordion-content" data-tab-content>
+        <div class="grid-x grid-padding-x">
+          <div class="cell medium-6 small-12">
+            <h5>Request params: </h5>
+            <ul class="no-bullet" style="font-size: 13px; padding-left: 20px; margin-top: 0;">
+              <li><b>method_name</b>: 'feed_edit'</li>
+              <li><b>private_key</b>: (string)</li>
+              <li><b>id</b>: (int)</li>
+              <li><b>protected</b>: (int) 0 / 1</li>
+              <li><b>title</b>: (string)</li>
+              <li><b>text</b>: (string)</li>
+            </ul>
+          </div>
+          <div class="cell medium-6 small-12">
+            <h5>Response: </h5>
+
+            <pre><code>{"response":true}</code></pre>
+          </div>
+
+
+        </div>
+    </li>
+
+    <!-- Feed. delete -->
+    <li class="accordion-item" data-accordion-item>
+      <a href="#" class="accordion-title">
+        Feed. Удалить запись
+      </a>
+
+      <div class="accordion-content" data-tab-content>
+        <div class="grid-x grid-padding-x">
+          <div class="cell medium-6 small-12">
+            <h5>Request params: </h5>
+            <ul class="no-bullet" style="font-size: 13px; padding-left: 20px; margin-top: 0;">
+              <li><b>method_name</b>: 'feed_delete'</li>
+              <li><b>private_key</b>: (string)</li>
+              <li><b>id</b>: (int)</li>
+            </ul>
+          </div>
+          <div class="cell medium-6 small-12">
+            <h5>Response: </h5>
+
+            <pre><code>{"response":true}</code></pre>
+          </div>
+
+
+        </div>
+    </li>
+    
+    
+    <!-- Feed GET. m1 by id -->
+    <li class="accordion-item" data-accordion-item>
+      <a href="#" class="accordion-title">
+        Feed GET. m1 вывод записи по id
+      </a>
+
+      <div class="accordion-content" data-tab-content>
+        <div class="grid-x grid-padding-x">
+          <div class="cell medium-6 small-12">
+            <h5>Request params: </h5>
+            <ul class="no-bullet" style="font-size: 13px; padding-left: 20px; margin-top: 0;">
+              <li><b>method_name</b>: 'feed_get'</li>
+              <li><b>m</b>: 1</li>
+              <li><b>public_key</b>: (string)</li>
+              <li><b><abbr title="Передавать в случае если запись protected">private_key</abbr></b>: (string)</li>
+              <li><b>id</b>: (int)</li>
+            </ul>
+          </div>
+          <div class="cell medium-6 small-12">
+            <h5>Response: </h5>
+
+            <pre><code>
+{
+  "response": {
+    "id": 1,
+    "client_id": 6,
+    "user_id": 7,
+    "protected": 0,
+    "date": 1521285309,
+    "title": "xxxx",
+    "text": "xxxx"
+  }
+}
+              </code></pre>
+          </div>
+
+
+        </div>
+    </li>
+
+    <!-- Feed GET. m2 few items -->
+    <li class="accordion-item" data-accordion-item>
+      <a href="#" class="accordion-title">
+        Feed GET. m2 вывод списка записей
+      </a>
+
+      <div class="accordion-content" data-tab-content>
+        <div class="grid-x grid-padding-x">
+          <div class="cell medium-6 small-12">
+            <h5>Request params: </h5>
+            <ul class="no-bullet" style="font-size: 13px; padding-left: 20px; margin-top: 0;">
+              <li><b>method_name</b>: 'feed_get'</li>
+              <li><b>m</b>: 2</li>
+              <li><b>public_key</b>: (string)</li>
+              <li><b><abbr title="Передавать в случае если нужно получить доступ к potected записям">private_key</abbr></b>: (string)</li>
+              <li><b><abbr title="В случае если нужен вывод только по поисковому запросу">search</abbr></b>: (string)</li>
+              <li><b><abbr title="кол-во штук">limit</abbr></b>: (int)</li>
+              <li><b><abbr title="страница">page</abbr></b>: (int)</li>
+            </ul>
+          </div>
+          <div class="cell medium-6 small-12">
+            <h5>Response: </h5>
+
+            <pre><code>
+{
+  "response": {
+    "count_items": 13,
+    "search": false,
+    "items": [
+      {
+        "id": 15,
+        "client_id": 6,
+        "user_id": 7,
+        "protected": 1,
+        "date": 1521383583,
+        "title": "et id qui inventore dolorem dignissimos sed",
+        "text": "It was opened by another footman in livery, with a trumpet in one hand and a large dish of tarts upon it: they looked so good, that it led into the open air. 'IF I don't want YOU with us!\"' 'They."
+      },
+      {
+        "id": 14,
+        "client_id": 6,
+        "user_id": 7,
+        "protected": 1,
+        "date": 1521383581,
+        "title": "blanditiis voluptatum aliquam illo occaecati ut at",
+        "text": "Hatter: 'but you could draw treacle out of sight before the end of the baby, it was getting so used to it in a hoarse, feeble voice: 'I heard every word you fellows were saying.' 'Tell us a story.'."
+      },
+      {
+        "id": 13,
+        "client_id": 6,
+        "user_id": 7,
+        "protected": 0,
+        "date": 1521383577,
+        "title": "voluptates eos provident sint delectus est sequi",
+        "text": "Alice. 'I don't think it's at all comfortable, and it put the hookah out of the way--' 'THAT generally takes some time,' interrupted the Gryphon. 'Well, I shan't go, at any rate, the Dormouse denied."
+      }
+    ],
+    "pages": {
+      "first": null,
+      "last": 5,
+      "center": 1,
+      "prev": null,
+      "next": 2,
+      "left": [],
+      "right": [
+        2,
+        3,
+        4
+      ]
+    }
+  }
+}
+              </code></pre>
+          </div>
+
+
+        </div>
+    </li>
+
 
   </ul>
 </div>

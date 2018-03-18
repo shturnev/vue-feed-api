@@ -17,7 +17,18 @@ class FeedTest extends TestCase
 
     public function testAdd()
     {
-        //
+        $faker  = Faker\Factory::create();
+
+        $arr = [
+            "id" => 1,
+            "private_key" => "c1d0920dc08e442e9fa8f8d4403bb917697f1b04597cee788c08fbe534bbac95",
+            "protected" => 1,
+            "title" => $faker->words(7, true),
+            "text" => $faker->realText()
+        ];
+
+        $res = (new Feed())->add($arr);
+        $this->assertTrue(is_array($res));
     }
 
     public function testEdit()

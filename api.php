@@ -94,6 +94,48 @@ if($_REQUEST["method_name"] == "feed_add" ){
     echo json_encode($res);
     exit;
 }
+if($_REQUEST["method_name"] == "feed_edit" ){
+
+    $O = new \classes\Feed();
+
+    try{
+        $res['response'] = $O->edit($_REQUEST);
+    }
+    catch(Exception $e){
+        $res['error'] = $e->getMessage();
+    }
+
+    echo json_encode($res);
+    exit;
+}
+if($_REQUEST["method_name"] == "feed_delete" ){
+
+    $O = new \classes\Feed();
+
+    try{
+        $res['response'] = $O->delete($_REQUEST);
+    }
+    catch(Exception $e){
+        $res['error'] = $e->getMessage();
+    }
+
+    echo json_encode($res);
+    exit;
+}
+if($_REQUEST["method_name"] == "feed_get" ){
+
+    $O = new \classes\getters\FeedGet();
+
+    try{
+        $res['response'] = $O->get($_REQUEST);
+    }
+    catch(Exception $e){
+        $res['error'] = $e->getMessage();
+    }
+
+    echo json_encode($res);
+    exit;
+}
 
 
 
