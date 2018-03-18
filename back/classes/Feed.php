@@ -50,4 +50,70 @@ class Feed
         return $arr;
 
     }
+
+    /**
+     * Редактировать
+     * @param $array - [id, private_key, title, text, protected]
+     * @return bool
+     * @throws \Exception
+     */
+    public function edit($array)
+    {
+        if(!is_numeric($array['id'])){
+            throw new \Exception("Invalid parametr `id`");}
+
+        $client = (new Client())->check_key($array['private_key'], "private");
+        if (!$client){
+            throw new \Exception("Client not found");}
+
+        //узнаем инфо про эту запись
+        $this->DB->where("id", $array['id']);
+        $resDB = $this->DB->getOne("feed");
+        if(!$resDB){
+            throw new \Exception("Item not found");}
+        if($resDB['client_id' != $client['id']]){
+            throw new \Exception("Access dinied");}
+
+
+        $this->DB->where("id", $array['id']);
+        $res = $this->DB->update("feed", [
+            "protected" => ($array['protected'])? 1 : 0,
+            "title" => TextSecurity::shield_hard($array['title']),
+            "text" => TextSecurity::shield_light($array['text']),
+        ]);
+
+        return $res;
+    }
+
+    /**
+     * delete
+     * @param $array - [id, private_key]
+     * @return bool
+     * @throws \Exception
+     */
+    public function delete($array)
+    {
+        if(!is_numeric($array['id'])){
+            throw new \Exception("Invalid parametr `id`");}
+
+        $client = (new Client())->check_key($array['private_key'], "private");
+        if (!$client){
+            throw new \Exception("Client not found");}
+
+        //узнаем инфо про эту запись
+        $this->DB->where("id", $array['id']);
+        $resDB = $this->DB->getOne("feed");
+        if(!$resDB){
+            throw new \Exception("Item not found");}
+        if($resDB['client_id' != $client['id']]){
+            throw new \Exception("Access dinied");}
+
+
+        $this->DB->where("id", $array['id']);
+        $res = $this->DB->delete("feed");
+
+        return $res;
+    }
+
+
 }
