@@ -15,7 +15,7 @@ $Path       = new \classes\helpers\Path();
 /*-----------------------------------
 Глобальные выборки
 -----------------------------------*/
-//$globals["auth"]         =  $Auth->isAuth($_COOKIE['token'])['response'];
+//$globals["auth"] =  $Auth->isAuth($_COOKIE['token'])['response'];
 
 $Path->parse();
 
