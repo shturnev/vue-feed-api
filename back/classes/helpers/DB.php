@@ -14,6 +14,6 @@ class DB
 
     public static function init()
     {
-        return new MysqliDb("127.0.0.1", "root", null, "vue-api");
+        return new MysqliDb("127.0.0.1", "root", null, "vue-api_DEV");
     }
 }

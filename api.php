@@ -1,6 +1,5 @@
 <?php
 require_once "back/vendor/autoload.php";
-
 $U = new \classes\User();
 $user = $U->isAuth($_COOKIE['token']);
 
@@ -54,6 +53,9 @@ if($_REQUEST["method_name"] == "client_delete"){
 /*-----------------------------------
 Удалённый request
 -----------------------------------*/
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: X-Requested-With, content-type');
+
 $postData = json_decode(file_get_contents('php://input'), true);
 if($postData){$_REQUEST = $postData;}
 header('Content-Type: application/json');
