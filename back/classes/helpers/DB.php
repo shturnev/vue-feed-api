@@ -8,7 +8,7 @@
 
 namespace classes\helpers;
 
-use MysqliDb;
+use MysqliDb; //https://packagist.org/packages/joshcam/mysqli-database-class
 class DB
 {
 
