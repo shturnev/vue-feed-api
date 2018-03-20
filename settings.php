@@ -5,7 +5,7 @@ define('FILES_DIR', __DIR__.DS."resources".DS."FILES");
 
 define("APP_DIR", ROOT_DIR.DS.'back');
 define("CACHE_DIR", ROOT_DIR.DS.'resources'.DS.'cache');
-define("VIEWS_DIR", ROOT_DIR.DS.APP_DIR.DS.'views');
+define("VIEWS_DIR", APP_DIR.DS.'views');
 define("FUNC_DIR", APP_DIR.DS.'functions');
 
 define("TWIG_CACHE", false);

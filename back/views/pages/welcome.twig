@@ -1,0 +1,30 @@
+{% extends "master.twig" %}
+
+
+{% block css %}{% endblock %}
+
+{% block content %}
+    <div class="grid-container">
+        <div class="grid-x">
+            <div class="cell">
+                <h1 class="text-center" style="margin: 50px 0 35px;">Welcome to API</h1>
+                <div class="text-center"> Обратите внимание, что это учебный ресурс и загруженная вами информация будет удалена через 2 месяца </div>
+
+                <div style="height: 50px;"></div>
+
+                <div style="max-width: 320px; margin: 0 auto;">
+                    <form action="" method="post" enctype="multipart/form-data" >
+                        <input type="text" name="email" value="" placeholder="email" />
+                        <input type="password" name="pass" value="" placeholder="password" />
+
+                        <div class="text-center"><input class="button" name="submit" type="submit" value="Login / Register"/></div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}{% endblock %}
+
