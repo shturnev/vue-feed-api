@@ -10,13 +10,14 @@ require_once "settings.php";
 /*-----------------------------------
 Основные глобальные классы
 -----------------------------------*/
-$Path       = new \classes\helpers\Path();
+$User   = new \classes\User();
+$Path   = new \classes\helpers\Path();
 //$Auth       = new \classes\Auth();
 
 /*-----------------------------------
 Глобальные выборки
 -----------------------------------*/
-//$globals["auth"] =  $Auth->isAuth($_COOKIE['token'])['response'];
+$globals["auth"] =  $User->isAuth($_COOKIE['token']);
 
 $Path->parse();
 

@@ -29,6 +29,11 @@ class UserTest extends TestCase
 
         $this->assertTrue(is_array($res) || is_null($res));
     }
+    public function test_isAuth()
+    {
+        $res = (new User())->isAuth("49f8cb80ba6b24a56cf4693c50e0203a");
+        $this->assertTrue(is_array($res) || is_bool($res));
+    }
 
 
 }

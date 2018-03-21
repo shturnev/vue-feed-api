@@ -1,7 +1,14 @@
 {% extends "master.twig" %}
 
 
-{% block css %}{% endblock %}
+{% block css %}
+    <style>
+        .material-icons{
+            vertical-align: middle;}
+        button{
+            outline: none;}
+    </style>
+{% endblock %}
 
 {% block content %}
     <div class="grid-container">
@@ -12,21 +19,50 @@
 
                 <div style="height: 50px;"></div>
 
-                {% if need_verified %}
-                <div class="callout warning">
-                    {{ need_verified }}
-                </div>
+                {% if not globals.auth %}
+                    {% if need_verified %}
+                    <div class="callout warning">
+                        {{ need_verified }}
+                    </div>
+                    {% endif %}
+
+                    <div style="max-width: 320px; margin: 0 auto;">
+                        <form action="/api" method="post" enctype="multipart/form-data" >
+                            <input type="hidden" name="method_name" value="login">
+                            <input type="text" name="email" value="" placeholder="email" />
+                            <input type="password" name="pass" value="" placeholder="password" />
+
+                            <div class="text-center"><input class="button" name="submit" type="submit" value="Login / Register"/></div>
+                        </form>
+                    </div>
+                {% else %}
+                    <div class="text-center">
+                        <a href="/api/?method_name=logout" class="button hollow secondary" style="width: 150px;">
+                            <i class="material-icons">power_settings_new</i> logout
+                        </a>
+                        <button data-toggle="create-client-cont" class="success hollow button" type="button" style="width: 150px;">
+                            <i class="material-icons">add</i> create client
+                        </button>
+                    </div>
+
+                    <div data-toggler data-animate="hinge-in-from-top hinge-out-from-top"
+                            id="create-client-cont" style="margin-top: 25px;" hidden>
+                        <form action="" method="post" enctype="multipart/form-data">
+
+                            <div class="input-group">
+                                <input class="input-group-field" type="text" name="title" value="" placeholder="title"/>
+
+                                <div class="input-group-button">
+                                    <input class="button" name="submit" type="submit" value="Create"/>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+
                 {% endif %}
 
-                <div style="max-width: 320px; margin: 0 auto;">
-                    <form action="/api" method="post" enctype="multipart/form-data" >
-                        <input type="hidden" name="method_name" value="login">
-                        <input type="text" name="email" value="" placeholder="email" />
-                        <input type="password" name="pass" value="" placeholder="password" />
-
-                        <div class="text-center"><input class="button" name="submit" type="submit" value="Login / Register"/></div>
-                    </form>
-                </div>
 
             </div>
         </div>

@@ -76,8 +76,6 @@ class User
 
         return false;
     }
-
-
     public function confirm(string $token)
     {
         if(!$token = TextSecurity::shield_hard($token)){
@@ -94,6 +92,14 @@ class User
         $this->DB->where("token", $new_token);
         return $this->DB->getOne("users");
     }
+    public function isAuth($token)
+    {
+        if(!$token = TextSecurity::shield_hard($token)){ return false; }
+
+        $this->DB->where("token", $token);
+        return $this->DB->getOne("users");
+    }
+
 
 
     public function new_token()

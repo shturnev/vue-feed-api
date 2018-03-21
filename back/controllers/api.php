@@ -27,6 +27,12 @@ if ($_REQUEST['method_name'] == "login") {
 
     exit;
 }
+if ($_REQUEST['method_name'] == "logout") {
+    setcookie("token", 1, strtotime("-2 month"), "/");
+    header("Location: /");
+
+    exit;
+}
 if ($_REQUEST['method_name'] == "confirm_email" && $_REQUEST['token']) {
     $O = new \classes\User();
 
