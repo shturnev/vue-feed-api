@@ -47,8 +47,8 @@
 
                     <div data-toggler data-animate="hinge-in-from-top hinge-out-from-top"
                             id="create-client-cont" style="margin-top: 25px;" hidden>
-                        <form action="" method="post" enctype="multipart/form-data">
-
+                        <form action="/api" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="method_name" value="client_create">
                             <div class="input-group">
                                 <input class="input-group-field" type="text" name="title" value="" placeholder="title"/>
 
@@ -61,6 +61,10 @@
                         </form>
                     </div>
 
+
+                    {% if clients %}{{ include("blocks/clients.twig") }} {% endif %}
+
+
                 {% endif %}
 
 
@@ -69,5 +73,11 @@
     </div>
 {% endblock %}
 
-{% block scripts %}{% endblock %}
+{% block scripts %}
+    <script>
+      $('[data-js="delete"]').on("click", function () {
+        if(!confirm("Удалить?")){ return false; }
+      });
+    </script>
+{% endblock %}
 

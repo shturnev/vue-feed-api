@@ -49,3 +49,31 @@ if ($_REQUEST['method_name'] == "confirm_email" && $_REQUEST['token']) {
 
     exit;
 }
+if ($_REQUEST['method_name'] == "client_create") {
+    $O = new \classes\Client();
+    $_REQUEST['token'] = $_COOKIE['token'];
+
+    try {
+        $O->create($_REQUEST);
+        header("Location: /");
+
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
+
+    exit;
+}
+if ($_REQUEST['method_name'] == "client_delete") {
+    $O = new \classes\Client();
+    $_REQUEST['token'] = $_COOKIE['token'];
+
+    try {
+        $O->delete($_REQUEST);
+        header("Location: /");
+
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
+
+    exit;
+}

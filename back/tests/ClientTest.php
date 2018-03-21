@@ -25,4 +25,14 @@ class ClientTest extends TestCase
 
         $this->assertTrue(is_array($res));
     }
+    public function test_delete()
+    {
+
+        $res = (new Client())->delete([
+            "token" => "49f8cb80ba6b24a56cf4693c50e0203a",
+            "id" => 11,
+        ]);
+
+        $this->assertTrue($res);
+    }
 }
