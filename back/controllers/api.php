@@ -77,3 +77,24 @@ if ($_REQUEST['method_name'] == "client_delete") {
 
     exit;
 }
+
+/*-----------------------------------
+Внешнее api
+-----------------------------------*/
+$postData = json_decode(file_get_contents('php://input'), true);
+if($postData){$_REQUEST = array_merge($_REQUEST, $postData);}
+header('Content-Type: application/json');
+
+if ($_REQUEST['method_name'] == "client_get") {
+    $O = new \classes\getters\ClientGet();
+    $_REQUEST['token'] = $_COOKIE['token'];
+
+    try {
+        $res['response'] = $O->get($_REQUEST);
+
+    } catch (Exception $e) {
+        $res['error'] = $e->getMessage();
+    }
+
+    exit(json_encode($res));
+}
