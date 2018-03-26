@@ -98,3 +98,28 @@ if ($_REQUEST['method_name'] == "client_get") {
 
     exit(json_encode($res));
 }
+if ($_REQUEST['method_name'] == "feed_add") {
+    $O = new \classes\Feed();
+
+    try {
+        $res['response'] = $O->add($_REQUEST);
+
+    } catch (Exception $e) {
+        $res['error'] = $e->getMessage();
+    }
+
+    exit(json_encode($res));
+}
+if ($_REQUEST['method_name'] == "feed_delete") {
+    $O = new \classes\Feed();
+
+    try {
+        $res['response'] = $O->delete($_REQUEST);
+
+    } catch (Exception $e) {
+        $res['error'] = $e->getMessage();
+    }
+
+    exit(json_encode($res));
+}
+

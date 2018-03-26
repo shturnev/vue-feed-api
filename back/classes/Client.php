@@ -62,6 +62,14 @@ class Client
         return true;
     }
 
+    public function check_key(string $key, $type = 'private')
+    {
+        $type = ($type == 'private')? 'private_key' : 'public_key';
+
+        $this->DB->where($type, TextSecurity::shield_hard($key));
+        return $this->DB->getOne("clients");
+    }
+
     public function new_key()
     {
         return hash("sha256", time().rand());
