@@ -28,15 +28,30 @@ class FeedTest extends TestCase
 
         $this->assertTrue(is_array($res));
     }
+    public function test_edit()
+    {
+        $faker = Factory::create();
+
+        $res = (new Feed())->edit([
+            "private_key" => "969a5d7a003e6ecaab166fb31bf625febbc4e510048b1bdb92c0ecd50de98e12",
+            "title" => $faker->text(60),
+            "text" => $faker->realText(),
+            "protected" => array_rand([true, false], 1),
+            "id" => 4
+        ]);
+
+        $this->assertTrue(is_bool($res));
+    }
     public function test_delete()
     {
-
+        $faker = Factory::create();
 
         $res = (new Feed())->delete([
             "private_key" => "969a5d7a003e6ecaab166fb31bf625febbc4e510048b1bdb92c0ecd50de98e12",
-            "id" => 1,
+            "id" => 2,
         ]);
 
-        $this->assertTrue($res);
+        $this->assertTrue(is_bool($res));
     }
+
 }
