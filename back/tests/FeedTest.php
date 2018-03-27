@@ -44,7 +44,6 @@ class FeedTest extends TestCase
     }
     public function test_delete()
     {
-        $faker = Factory::create();
 
         $res = (new Feed())->delete([
             "private_key" => "969a5d7a003e6ecaab166fb31bf625febbc4e510048b1bdb92c0ecd50de98e12",
