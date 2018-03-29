@@ -21,7 +21,8 @@ if ($_REQUEST['method_name'] == "login") {
             header("Location: /");
         }
         else{
-            echo $e->getMessage();
+            setcookie("error", $e->getMessage(), strtotime("+10 sec"), "/");
+            header("Location: /");
         }
     }
 
@@ -44,7 +45,8 @@ if ($_REQUEST['method_name'] == "confirm_email" && $_REQUEST['token']) {
             header("Location: /");
         }
     } catch (Exception $e) {
-        echo $e->getMessage();
+        setcookie("error", $e->getMessage(), strtotime("+10 sec"), "/");
+        header("Location: /");
     }
 
     exit;
@@ -58,7 +60,8 @@ if ($_REQUEST['method_name'] == "client_create") {
         header("Location: /");
 
     } catch (Exception $e) {
-        echo $e->getMessage();
+        setcookie("error", $e->getMessage(), strtotime("+10 sec"), "/");
+        header("Location: /");
     }
 
     exit;
@@ -72,7 +75,8 @@ if ($_REQUEST['method_name'] == "client_delete") {
         header("Location: /");
 
     } catch (Exception $e) {
-        echo $e->getMessage();
+        setcookie("error", $e->getMessage(), strtotime("+10 sec"), "/");
+        header("Location: /");
     }
 
     exit;
@@ -81,6 +85,9 @@ if ($_REQUEST['method_name'] == "client_delete") {
 /*-----------------------------------
 Внешнее api
 -----------------------------------*/
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: X-Requested-With, content-type');
+
 $postData = json_decode(file_get_contents('php://input'), true);
 if($postData){$_REQUEST = array_merge($_REQUEST, $postData);}
 header('Content-Type: application/json');
@@ -134,5 +141,19 @@ if ($_REQUEST['method_name'] == "feed_delete") {
 
     exit(json_encode($res));
 }
+if ($_REQUEST['method_name'] == "feed_get") {
+    $O = new \classes\getters\FeedGet();
+
+    try {
+        $res['response'] = $O->get($_REQUEST);
+
+    } catch (Exception $e) {
+        $res['error'] = $e->getMessage();
+    }
+
+    exit(json_encode($res));
+}
+
+
 
 
