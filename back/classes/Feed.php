@@ -75,6 +75,19 @@ class Feed
         $resDb = $this->DB->delete("feed");
         return $resDb;
     }
+    public function up($array)
+    {
+        $c = (new Client())->check_key($array['private_key']);
+        if(!$c){
+            throw new \Exception("Access denied");}
+
+        if(!is_numeric($array['id'])){
+            throw new \Exception("Не корректный параметр id");}
+
+        $this->DB->where("client_id", $c['id'])->where("id", $array['id']);
+        $resDb = $this->DB->update("feed", ["date" => time()]);
+        return $resDb;
+    }
 
 
 }

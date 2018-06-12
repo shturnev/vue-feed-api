@@ -141,6 +141,18 @@ if ($_REQUEST['method_name'] == "feed_delete") {
 
     exit(json_encode($res));
 }
+if ($_REQUEST['method_name'] == "feed_up") {
+    $O = new \classes\Feed();
+
+    try {
+        $res['response'] = $O->up($_REQUEST);
+
+    } catch (Exception $e) {
+        $res['error'] = $e->getMessage();
+    }
+
+    exit(json_encode($res));
+}
 if ($_REQUEST['method_name'] == "feed_get") {
     $O = new \classes\getters\FeedGet();
 

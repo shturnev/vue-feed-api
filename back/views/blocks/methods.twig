@@ -164,6 +164,33 @@
         </li>
         <li class="accordion-item" data-accordion-item>
 
+            <a href="#" class="accordion-title">Feed up. Поднять запись в ленте</a>
+
+            <div class="accordion-content" data-tab-content>
+                <div class="grid-x grid-margin-x">
+                    <div class="cell small-12 medium-6">
+                        <h5>Request:</h5>
+                        <ul>
+                            <li><b>method_name</b>: feed_up</li>
+                            <li><b>private_key</b>: (string)</li>
+                            <li><b>id</b>: (int)</li>
+                        </ul>
+                    </div>
+                    <div class="cell small-12 medium-6">
+                        <h5>Response:</h5>
+
+                        <pre><code class="json">
+{"response":true}
+                            </code></pre>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </li>
+        <li class="accordion-item" data-accordion-item>
+
         <a href="#" class="accordion-title">Feed get. Получить инфо про запись по id</a>
 
         <div class="accordion-content" data-tab-content>
@@ -212,6 +239,8 @@
                         <li><b>method_name</b>: feed_get</li>
                         <li><b>m</b>: 2</li>
                         <li><b>public_key</b>: (string)</li>
+                        <li><b>limit</b>: (int)</li>
+                        <li><b>page</b>: (int)</li>
                         <li>~ <b>private_key</b>: (string)</li>
                         <li>~ <b>search</b>: (string)</li>
                     </ul>
